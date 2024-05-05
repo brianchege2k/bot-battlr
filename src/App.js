@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import BotCollection from './components/BotCollection';
+import YourBotArmy from './components/YourBotArmy';
+import BotSpecs from './components/BotSpecs';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/" exact component={BotCollection} />
+          <Route path="/your-bot-army" component={YourBotArmy} />
+          <Route path="/bots/:botId" component={BotSpecs} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
