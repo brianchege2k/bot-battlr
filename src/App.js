@@ -9,7 +9,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" exact component={BotCollection} />
+          <Route path="/" element={<BotCollection />} />
           <Route path="/your-bot-army" component={YourBotArmy} />
           <Route path="/bots/:botId" component={BotSpecs} />
         </Routes>
