@@ -3,8 +3,8 @@ import React from 'react';
 const YourBotArmy = ({ army, releaseBot, dischargeBot }) => {
   return (
     <div>
-      <h2>Your Bot Army</h2>
-      <div className="row">
+      <h2>Your Bot Army:</h2>
+      <div className="row mb-5">
         {army.map(bot => (
           <div key={bot.id} className="col-md-3 mb-3">
             <div className="card">

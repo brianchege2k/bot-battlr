@@ -18,6 +18,7 @@ const BotCollection = () => {
   const enlistBot = (bot) => {
     if (!army.some(b => b.id === bot.id)) {
       setArmy([...army, bot]);
+      alert(`You have enlisted ${bot.name} to your army!`);
     }
   };
 
@@ -49,7 +50,7 @@ const BotCollection = () => {
       <div className="row">
         {bots.map(bot => (
           <div key={bot.id} className="col-md-3">
-            <div className="card">
+            <div className="card mb-3">
             <Link to={`/bots/${bot.id}`}>
               <img src={bot.avatar_url} className="card-img-top" alt={bot.name} />
               </Link>
