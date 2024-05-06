@@ -1,6 +1,6 @@
 export const fetchBots = async () => {
     try {
-      const response = await fetch('http://localhost:3001/bots');
+      const response = await fetch('https://my-json-server.typicode.com/brianchege2k/bot-battlr/bots');
       if (!response.ok) {
         throw new Error('Failed to fetch bots');
       }
@@ -13,7 +13,7 @@ export const fetchBots = async () => {
   
   export const deleteBot = async (botId) => {
     try {
-      const response = await fetch(`http://localhost:3001/bots/${botId}`, {
+      const response = await fetch(`https://my-json-server.typicode.com/brianchege2k/bot-battlr/bots/${botId}`, {
         method: 'DELETE',
       });
       if (!response.ok) {
