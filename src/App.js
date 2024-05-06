@@ -11,7 +11,7 @@ const App = () => {
       <div className="container">
         <Routes>
           <Route path="/" element={<BotCollection />} />
-          <Route path="/bots/:botId" component={BotSpecs} />
+          <Route path="/bots/:botId" element={<BotSpecs/>} />
         </Routes>
       </div>
     </Router>

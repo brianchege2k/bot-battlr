@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { fetchBots, deleteBot } from '../api';
 import YourBotArmy from './YourBotArmy';
-
+import SortBar from './SortBar';
 const BotCollection = () => {
   const [bots, setBots] = useState([]);
   const [army, setArmy] = useState([]);
@@ -27,9 +28,7 @@ const BotCollection = () => {
 
   const dischargeBot = async (bot) => {
     try {
-      // Send request to delete bot from backend
       await deleteBot(bot.id);
-      // If deletion is successful, remove bot from army in frontend
       const updatedArmy = army.filter(b => b.id !== bot.id);
       setArmy(updatedArmy);
     } catch (error) {
@@ -37,20 +36,29 @@ const BotCollection = () => {
     }
   };
 
+  const sortBots = (criteria) => {
+    const sortedBots = [...bots].sort((a, b) => a[criteria] - b[criteria]);
+    setBots(sortedBots);
+  };
+
   return (
     <div>
       <YourBotArmy army={army} releaseBot={releaseBot} dischargeBot={dischargeBot} />
       <h2>Bot Collection</h2>
+      <SortBar sortBots={sortBots} />
       <div className="row">
         {bots.map(bot => (
           <div key={bot.id} className="col-md-3">
             <div className="card">
+            <Link to={`/bots/${bot.id}`}>
               <img src={bot.avatar_url} className="card-img-top" alt={bot.name} />
+              </Link>
               <div className="card-body">
                 <h5 className="card-title">{bot.name}</h5>
                 <p className="card-text">Health: {bot.health}</p>
                 <p className="card-text">Damage: {bot.damage}</p>
                 <p className="card-text">Armor: {bot.armor}</p>
+                <p className="card-text">Class: {bot.bot_class}</p>
                 <button onClick={() => enlistBot(bot)} className="btn btn-primary">Enlist</button>
               </div>
             </div>

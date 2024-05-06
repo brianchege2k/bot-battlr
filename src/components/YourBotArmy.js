@@ -14,6 +14,7 @@ const YourBotArmy = ({ army, releaseBot, dischargeBot }) => {
                 <p className="card-text">Health: {bot.health}</p>
                 <p className="card-text">Damage: {bot.damage}</p>
                 <p className="card-text">Armor: {bot.armor}</p>
+                <p className="card-text">Class: {bot.bot_class}</p>
                 <button onClick={() => releaseBot(bot)} className="btn btn-danger mr-2">Release</button>
                 <button onClick={() => dischargeBot(bot)} className="btn btn-danger">Delete</button>
               </div>
