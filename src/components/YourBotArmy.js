@@ -1,12 +1,14 @@
+// src/components/YourBotArmy.js
+
 import React from 'react';
 
-const YourBotArmy = ({ army, releaseBot, dischargeBot }) => {
+const YourBotArmy = ({ army, releaseBot }) => {
   return (
-    <div className="container">
-      <h2 className="my-4">Your Bot Army</h2>
+    <div>
+      <h2>Your Bot Army</h2>
       <div className="row">
         {army.map(bot => (
-          <div className="col-md-4 mb-4" key={bot.id}>
+          <div key={bot.id} className="col-md-3 mb-3">
             <div className="card">
               <img src={bot.avatar_url} className="card-img-top" alt={bot.name} />
               <div className="card-body">
@@ -14,9 +16,7 @@ const YourBotArmy = ({ army, releaseBot, dischargeBot }) => {
                 <p className="card-text">Health: {bot.health}</p>
                 <p className="card-text">Damage: {bot.damage}</p>
                 <p className="card-text">Armor: {bot.armor}</p>
-                <p className="card-text">Class: {bot.bot_class}</p>
-                <button onClick={() => releaseBot(bot)} className="btn btn-danger mr-2">Release</button>
-                <button onClick={() => dischargeBot(bot)} className="btn btn-danger">Discharge</button>
+                <button onClick={() => releaseBot(bot)} className="btn btn-danger">Release</button>
               </div>
             </div>
           </div>

@@ -1,21 +1,39 @@
-import React, { useState, useEffect } from 'react';
+// src/components/BotCollection.js
 
-const BotCollection = ({ enlistBot }) => {
+import React, { useState, useEffect } from 'react';
+import { fetchBots } from '../api';
+import YourBotArmy from './YourBotArmy';
+
+const BotCollection = () => {
   const [bots, setBots] = useState([]);
+  const [army, setArmy] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/bots')
-      .then(response => response.json())
-      .then(data => setBots(data))
-      .catch(error => console.error('Error fetching bots:', error));
+    const fetchData = async () => {
+      const botData = await fetchBots();
+      setBots(botData);
+    };
+    fetchData();
   }, []);
 
+  const enlistBot = (bot) => {
+    if (!army.some(b => b.id === bot.id)) {
+      setArmy([...army, bot]);
+    }
+  };
+
+  const releaseBot = (bot) => {
+    const updatedArmy = army.filter(b => b.id !== bot.id);
+    setArmy(updatedArmy);
+  };
+
   return (
-    <div className="container">
-      <h2 className="my-4">Bot Collection</h2>
+    <div>
+      <YourBotArmy army={army} releaseBot={releaseBot} />
+      <h2>Bot Collection</h2>
       <div className="row">
         {bots.map(bot => (
-          <div className="col-md-4 mb-4" key={bot.id}>
+          <div key={bot.id} className="col-md-3">
             <div className="card">
               <img src={bot.avatar_url} className="card-img-top" alt={bot.name} />
               <div className="card-body">
@@ -23,7 +41,6 @@ const BotCollection = ({ enlistBot }) => {
                 <p className="card-text">Health: {bot.health}</p>
                 <p className="card-text">Damage: {bot.damage}</p>
                 <p className="card-text">Armor: {bot.armor}</p>
-                <p className="card-text">Class: {bot.bot_class}</p>
                 <button onClick={() => enlistBot(bot)} className="btn btn-primary">Enlist</button>
               </div>
             </div>
