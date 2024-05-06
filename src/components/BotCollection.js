@@ -1,7 +1,5 @@
-// src/components/BotCollection.js
-
 import React, { useState, useEffect } from 'react';
-import { fetchBots } from '../api';
+import { fetchBots, deleteBot } from '../api';
 import YourBotArmy from './YourBotArmy';
 
 const BotCollection = () => {
@@ -27,9 +25,21 @@ const BotCollection = () => {
     setArmy(updatedArmy);
   };
 
+  const dischargeBot = async (bot) => {
+    try {
+      // Send request to delete bot from backend
+      await deleteBot(bot.id);
+      // If deletion is successful, remove bot from army in frontend
+      const updatedArmy = army.filter(b => b.id !== bot.id);
+      setArmy(updatedArmy);
+    } catch (error) {
+      console.error('Error deleting bot:', error);
+    }
+  };
+
   return (
     <div>
-      <YourBotArmy army={army} releaseBot={releaseBot} />
+      <YourBotArmy army={army} releaseBot={releaseBot} dischargeBot={dischargeBot} />
       <h2>Bot Collection</h2>
       <div className="row">
         {bots.map(bot => (

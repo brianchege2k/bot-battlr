@@ -1,8 +1,6 @@
-// src/components/YourBotArmy.js
-
 import React from 'react';
 
-const YourBotArmy = ({ army, releaseBot }) => {
+const YourBotArmy = ({ army, releaseBot, dischargeBot }) => {
   return (
     <div>
       <h2>Your Bot Army</h2>
@@ -16,7 +14,8 @@ const YourBotArmy = ({ army, releaseBot }) => {
                 <p className="card-text">Health: {bot.health}</p>
                 <p className="card-text">Damage: {bot.damage}</p>
                 <p className="card-text">Armor: {bot.armor}</p>
-                <button onClick={() => releaseBot(bot)} className="btn btn-danger">Release</button>
+                <button onClick={() => releaseBot(bot)} className="btn btn-danger mr-2">Release</button>
+                <button onClick={() => dischargeBot(bot)} className="btn btn-danger">Delete</button>
               </div>
             </div>
           </div>
